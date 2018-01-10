@@ -10,7 +10,7 @@ class Index extends Controller
      * @desc               首页
      * @return string
      * @time 2018/1/6 15:41
-     * @author LTK 617209350@qq.com
+     * @author LTK 
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class Index extends Controller
     /**
      * @desc               从头条爬取评论数据
      * @time 2018/1/6 15:41
-     * @author LTK 617209350@qq.com
+     * @author LTK 
      */
     public function getToutiaoList()
     {
@@ -61,10 +61,6 @@ class Index extends Controller
                 $add['add_time'] = $time;
                 $add['offset'] = $offset;
 
-                if($add['user_name'] == '用户55991757202'){
-                    cache('url',$url);
-                }
-                
                 // 判断用户是否已存在
                 $id = $tt->where('text',$add['text'])->column('id');
 
@@ -129,7 +125,7 @@ class Index extends Controller
     /**
      * @desc               从头条爬取评论数据2
      * @time 2018/1/6 15:41
-     * @author LTK 617209350@qq.com
+     * @author 
      */
     public function getToutiaoList2()
     {
@@ -200,7 +196,7 @@ class Index extends Controller
      * @desc               获取头条单身用户表
      * @return string
      * @time 2018/1/6 15:41
-     * @author LTK 617209350@qq.com
+     * @author 
      */
     public function getUserList()
     {
@@ -248,7 +244,7 @@ class Index extends Controller
      * @param string $url          地址
      * @return mixed
      * @time 2018/1/6 15:40
-     * @author LTK 617209350@qq.com
+     * @author 
      */
     public function getData($url)
     {
