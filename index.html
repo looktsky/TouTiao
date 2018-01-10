@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>looktsky</title>
+    <link rel="stylesheet" href="__STATIC__/index/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-main">
+    <div class="layui-form layui-form-pane" action="">
+        <h4 class="layui-text"  style="margin-top: 100px;">数据来头条文章的评论：<a href="https://www.toutiao.com/a6507586637612974599/">如果你还单身，那必须进来看看</a></h4>
+        <h4 class="layui-text" >实时评论总数：{$total_number}  &nbsp;&nbsp;数据库评论总数：{$my_number}</h4>
+        <div class="layui-form-item" >
+            <label class="layui-form-label">搜索条件</label>
+            <div class="layui-input-inline" style="width: 800px;">
+                <input type="text"  name="key_word" id="key_word" required lay-verify="required"  placeholder="请输入地域（多条件,隔开） 例如 长沙,男" autocomplete="off" class="layui-input">
+            </div>
+            <button class="layui-btn" id="search" data-type="reload">查询</button>
+            <!--<div class="layui-btn"  onclick="getToutiaoList(9442);">刷新数据库</div>-->
+        </div>
+    </div>
+    <table class="layui-hide" id="test"></table>
+</div>
+<script src="__STATIC__/index/layui/layui.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/html" id="logo">
+    <img src="{{d.user_profile_image_url}}" alt="" width="40px" height="40px">
+</script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+    });
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:"{:url('getUserList')}"
+            ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                ,groups: 2 // 显示 2 个连续页码
+                ,limit:20  // 每页20
+            }
+            ,cols: [[
+                {field:'id', width:70, title: 'ID', sort: false}
+                ,{field:'user_name', width:160, title: '用户名'}
+                ,{field:'user_logo', title:'头像', width:70, templet: '#logo', unresize: true}
+                ,{field:'text', width:323, title: '评论内容', sort: false}
+                ,{field:'create_time', width:160, title: '评论时间'}
+                ,{field:'share_url', width:350, title: '用户链接', sort: false}
+
+            ]]
+            ,id: 'testReload'
+        });
+
+        var $ = layui.$, active = {
+            reload: function () {
+                var key_word = $('#key_word');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: {
+                        key_word: key_word.val()
+                    }
+                });
+            }
+        };
+
+
+        $('.layui-form #search').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+
+
+//    function getToutiaoList(offset) {
+//        $.post("{:url('getToutiaoList')}",{'offset':offset},function (res) {
+//            if(res['status'] == 1){
+//                console.log(res['offset']);
+//                getToutiaoList(res['offset']);
+//            }else {
+//                console.log('is ok');
+//                layer.msg('数据获取完成');
+//            }
+//        });
+//        return false;
+//    }
+</script>
+</body>
+</html>
