@@ -112,7 +112,6 @@ class Index extends Controller
                 $all ++;
             }
 
-
             $rt['status'] = 1;
             $rt['more'] = $more;
             $rt['offset'] = (int)$cu + $all;
@@ -125,7 +124,7 @@ class Index extends Controller
     /**
      * @desc               从头条爬取评论数据2
      * @time 2018/1/6 15:41
-     * @author 
+     * @author LTK 
      */
     public function getToutiaoList2()
     {
@@ -196,7 +195,7 @@ class Index extends Controller
      * @desc               获取头条单身用户表
      * @return string
      * @time 2018/1/6 15:41
-     * @author 
+     * @author LTK 
      */
     public function getUserList()
     {
@@ -244,7 +243,7 @@ class Index extends Controller
      * @param string $url          地址
      * @return mixed
      * @time 2018/1/6 15:40
-     * @author 
+     * @author LTK 
      */
     public function getData($url)
     {
