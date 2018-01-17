@@ -61,8 +61,8 @@ class Index extends Controller
                 $add['add_time'] = $time;
                 $add['offset'] = $offset;
 
-                // 判断用户是否已存在
-                $id = $tt->where('text',$add['text'])->column('id');
+                // 判断评论是否已存在
+                $id = $tt->where('text',$add['text'])->value('id');
 
                 if(!$id){
                     $more ++;
@@ -91,8 +91,8 @@ class Index extends Controller
                     $add2['add_time'] = $time;
                     $add2['offset'] = $offset;
 
-                    // 判断用户是否已存在
-                    $id = $tt->where('text',$add2['text'])->column('id');
+                    // 判断评论是否已存在
+                    $id = $tt->where('text',$add2['text'])->value('id');
 
                     if(!$id){
                         // 获取其他信息
@@ -156,7 +156,7 @@ class Index extends Controller
                 $add['add_time'] = $time;
 
                 // 判断用户是否已存在
-                $id = $tt->where('user_name',$add['user_name'])->column('id');
+                $id = $tt->where('user_name',$add['user_name'])->value('id');
 
                 if(!$id){
                     $tt->insert($add);
@@ -174,8 +174,7 @@ class Index extends Controller
                     $add2['add_time'] = $time;
 
                     // 判断用户是否已存在
-                    $id = $tt->where('user_name',$add2['user_name'])->column('id');
-
+                    $id = $tt->where('user_name',$add2['user_name'])->value('id');
                     if(!$id){
                         $tt->insert($add2);
                     }
